@@ -1,4 +1,5 @@
 resource "google_storage_bucket" "terra-bucket" {
+  project = var.project_id
   name          = var.bucket_name
   location      = "US-WEST1"
   force_destroy = true
