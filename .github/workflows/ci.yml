@@ -16,16 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Authenticate with Google Cloud
-      #   run: |
-      #     echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
-      #     gcloud auth application-default login
       - uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" # Replace with the name of your GitHub Actions secret
-
-        # env:
-        #   GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
 
       - uses: hashicorp/setup-terraform@v3
 
@@ -36,6 +29,5 @@ jobs:
       - id: plan
         run: terraform plan -no-color
 
-      # - run: echo ${{ steps.plan.outputs.stdout }}
-      # - run: echo ${{ steps.plan.outputs.stderr }}
-      # - run: echo ${{ steps.plan.outputs.exitcode }}
+      - name: Apply
+        run: terraform apply

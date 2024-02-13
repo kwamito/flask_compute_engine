@@ -1,3 +1,11 @@
+resource "google_storage_bucket" "terra-bucket" {
+  name          = var.bucket_name
+  location      = "US-WEST1"
+  force_destroy = true
+
+  uniform_bucket_level_access = true
+}
+
 resource "google_compute_network" "vpc_network" {
   project = var.project_id
   name                    = "custom-mode-network"
@@ -38,3 +46,10 @@ resource "google_compute_instance" "default" {
     }
   }
 }
+
+# terraform {
+#   backend "gcs" {
+#     bucket  = var.bucket_name
+#     prefix  = "terra-bucket101"
+#   }
+# }
