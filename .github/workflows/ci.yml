@@ -16,6 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Authenticate with Google Cloud
+        run: |
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
+          terraform login
+
       - uses: hashicorp/setup-terraform@v3
 
       - run: terraform init
