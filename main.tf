@@ -1,16 +1,11 @@
-# resource "google_project" "practice-413815" {
-#   name       = "practice"
-#   project_id = "practice-413815"
-# }
-
 resource "google_compute_network" "vpc_network" {
   project = var.project_id
-  name                    = "my-custom-mode-network"
+  name                    = "custom-mode-network"
   auto_create_subnetworks = false
   mtu                     = 1460
 }
 
-resource "google_compute_subnetwork" "default" {
+resource "google_compute_subnetwork" "subnet1" {
   project = var.project_id
   name          = "my-custom-subnet"
   ip_cidr_range = "10.0.1.0/24"
@@ -33,10 +28,10 @@ resource "google_compute_instance" "default" {
   }
 
   # Install Flask
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync; pip install flask"
+  metadata_startup_script = "sudo apt-get update; sudo apt install git; sudo apt-get install -yq build-essential python3-pip rsync; git clone https://github.com/kwamito/flask_compute_engine.git; cd flask_compute_engine; pip install -r requirements.txt; python3 app.py"
 
   network_interface {
-    subnetwork = google_compute_subnetwork.default.id
+    subnetwork = google_compute_subnetwork.subnet1.id
 
     access_config {
       # Include this section to give the VM an external IP address
