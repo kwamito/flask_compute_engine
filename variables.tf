@@ -1,11 +1,17 @@
 variable "project_id" {
-  type = string
+  type        = string
   description = "value"
-  default = "practice-413815"
+  default     = "practice-413815"
 }
 
 variable "bucket_name" {
-  type = string
+  type        = string
   description = "Name of storage bucket for backend"
-  default = "terra-bucket101"
+  default     = "terra-bucket101"
+}
+
+variable "region" {
+  type        = string
+  description = "Default region"
+  default     = "us-west1"
 }

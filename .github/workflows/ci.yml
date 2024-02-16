@@ -22,12 +22,13 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
 
-      - run: terraform init
+      - id: Init
+        run: terraform init
 
       - run: ls
 
-      - id: plan
+      - id: Plan
         run: terraform plan -no-color
 
-      - name: Apply
+      - id: Apply
         run: terraform apply

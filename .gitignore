@@ -2,3 +2,8 @@
 env/
 google.json
 .terraform*
+
+draft.txt
+terraform.tfstate.backup
+terraform.tfstate
+terraform.tfstate
